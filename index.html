@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blocks Distance</title>
+  <script>
+    function solution(blocks) {
+      let maxDistance = 0;
+      let leftPointer = 0;
+      let rightPointer = blocks.length - 1;
+
+      while (leftPointer < rightPointer) {
+        const distance = rightPointer - leftPointer;
+        maxDistance = Math.max(maxDistance, distance);
+
+        if (blocks[leftPointer] <= blocks[rightPointer]) {
+          leftPointer++;
+        } else {
+          rightPointer--;
+        }
+      }
+
+      return maxDistance;
+    }
+
+    function calculateDistance() {
+      const blocksInput = document.getElementById('blocks-input');
+      const resultElement = document.getElementById('result');
+
+      const blocks = blocksInput.value.split(',').map(Number);
+      const distance = solution(blocks);
+
+      resultElement.textContent = `Longest possible distance: ${distance}`;
+    }
+  </script>
+  <style>
+    body {
+        text-align: center;
+        background-color: black;
+        color: white;
+        padding-top: 10rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Blocks Distance Calculator</h1>
+  
+  <label for="blocks-input">Enter blocks heights (comma-separated):</label>
+  <input type="text" id="blocks-input">
+  <button onclick="calculateDistance()">Calculate</button>
+  
+  <div id="result"></div>
+</body>
+</html>
